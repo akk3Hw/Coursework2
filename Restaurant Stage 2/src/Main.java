@@ -7,8 +7,7 @@ public class Main {
 		//Running the Manager
 		Manager manager = new Manager();
 		manager.run();
-		//------------9999999999-----------
-
+	
 	}
 
 }
