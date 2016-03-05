@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-public class ReadOrders {
+public class ReadOrders extends Thread{
 
 	// Attributes
 	private HashMap<Integer, HashSet<Order>> orders = new HashMap<Integer, HashSet<Order>>();
+	ArrayList<Order> arrayOfOrders = new ArrayList <Order>(); 
 	private HashSet<Dish> menu = new HashSet<Dish>();
 	private int errorLineOther = 1;
 	private int errorLineTableId = 1;
@@ -42,9 +48,21 @@ public class ReadOrders {
 			System.out.println("Sorry, the Orders file is missing");
 			System.exit(0);
 		}
-
-		while (scannerOrders.hasNextLine()) {
-
+	
+		long timer= System.currentTimeMillis();
+		long end = timer+2000;
+		
+		MyThread t = new MyThread();
+		t.start();
+		if (t.isAlive())
+		{
+			System.out.println("alive");
+		}
+		else{System.out.println("dead");}
+		
+		
+		while (scannerOrders.hasNextLine() && (System.currentTimeMillis() < end)) {
+		
 			String inputLine = scannerOrders.nextLine();
 			String OrderParts[] = inputLine.split(",");
 
@@ -97,8 +115,6 @@ public class ReadOrders {
 			//Check if there is an appropriate number of tables given
 			if(orderTableId>10) {
 			System.out.println("Sorry an order could not be achieved cause there is not a table with number: "+orderTableId+" in the Restaurant" );
-			
-		
 			}
 			//Check if the Order Dishes match the Menu dishes
 			int f=0;
@@ -111,8 +127,19 @@ public class ReadOrders {
 				System.out.println("Sorry the dish: "+orderDishName+" is not contained in the Menu");
 				System.exit(0);
 			}
-			
+
 			Order eachOrder = new Order(orderTableId, orderDishName, orderQuantity);
+			
+			//run(eachOrder);
+			t.run(eachOrder);				
+		
+			
+			//for (int i = 1; i < arrayOfOrders.size(); i++)
+			//{
+			//	System.out.println(arrayOfOrders.get(i).getTableID()+" "+arrayOfOrders.get(i).getDishName()
+			//	+ " "+ arrayOfOrders.get(i).getQuantity());
+			//}
+			
 			// Creating the HashMap of All Orders
 			if (orderTableId == 1) {
 				orderTable1.add(eachOrder);
@@ -145,14 +172,21 @@ public class ReadOrders {
 				orderTable10.add(eachOrder);
 				orders.put(10, orderTable10);
 			}
-
+			
 		}
-		scannerOrders.close();
+		scannerOrders.close();	
 	}
+	
 
 	//Return the Main Data Structure 
 	public HashMap<Integer, HashSet<Order>> getOrders() {
 		return orders;
+	}
+	
+	//Return the Arraylist data structure
+	public ArrayList<Order> getArrayList(){
+		return arrayOfOrders;
+
 	}
 
 }
