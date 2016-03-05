@@ -11,7 +11,7 @@ public class MyThread extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(arrayOfOrders.size());
+		System.out.println("The arraylist has "+ arrayOfOrders.size()+" orders");
         
 }
 }
