@@ -14,7 +14,7 @@ public class MyThread extends Thread {
 
 		System.out.println("The arraylist has "+ arrayOfOrders.size()+" orders");
 
-		System.out.println(arrayOfOrders.size());
+		
 
         
 }

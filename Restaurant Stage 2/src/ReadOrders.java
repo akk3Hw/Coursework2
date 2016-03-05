@@ -174,7 +174,8 @@ public class ReadOrders extends Thread{
 			}
 			
 		}
-		scannerOrders.close();	
+		scannerOrders.close();
+		
 	}
 	
 
