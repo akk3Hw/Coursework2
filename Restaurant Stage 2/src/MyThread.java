@@ -11,7 +11,11 @@ public class MyThread extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 		System.out.println("The arraylist has "+ arrayOfOrders.size()+" orders");
+=======
+		System.out.println(arrayOfOrders.size());
+>>>>>>> branch 'master' of https://github.com/akk3Hw/Coursework2.git
         
 }
 }
