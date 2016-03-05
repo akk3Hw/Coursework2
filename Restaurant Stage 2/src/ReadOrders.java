@@ -56,9 +56,9 @@ public class ReadOrders extends Thread{
 		t.start();
 		if (t.isAlive())
 		{
-			System.out.println("alive");
+			System.out.println("Thread is alive");
 		}
-		else{System.out.println("dead");}
+		else{System.out.println("Thread is dead");}
 		
 		
 		while (scannerOrders.hasNextLine() && (System.currentTimeMillis() < end)) {
