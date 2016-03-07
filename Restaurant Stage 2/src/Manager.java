@@ -50,6 +50,8 @@ public class Manager {
 		PrintStream ps3 = new PrintStream(fos3);
 		System.setOut(ps3);
 		dishesNotOrdered.printDishesNotOrdered();
+		
+		//bill
 	}
 
 }
